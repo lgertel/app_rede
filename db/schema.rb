@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171212125843) do
+ActiveRecord::Schema.define(version: 20171212131120) do
 
   create_table "admin_flows", force: :cascade do |t|
     t.integer "flow_type"
@@ -22,6 +22,21 @@ ActiveRecord::Schema.define(version: 20171212125843) do
 
   create_table "admin_roles", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "admin_tickets", force: :cascade do |t|
+    t.integer "flow_id"
+    t.string "cnpj"
+    t.string "name"
+    t.string "description"
+    t.string "city"
+    t.string "state"
+    t.string "address"
+    t.string "audio"
+    t.string "dossier"
+    t.string "report"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
