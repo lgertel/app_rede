@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Flow type:</strong>
+  <%= @admin_flow.flow_type %>
+</p>
+
+<p>
+  <strong>Stage:</strong>
+  <%= @admin_flow.stage %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @admin_flow.role_id %>
+</p>
+
+<%= link_to 'Edit', edit_admin_flow_path(@admin_flow) %> |
+<%= link_to 'Back', admin_flows_path %>

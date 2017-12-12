@@ -1,0 +1,32 @@
+<%= form_with(model: admin_flow, local: true) do |form| %>
+  <% if admin_flow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(admin_flow.errors.count, "error") %> prohibited this admin_flow from being saved:</h2>
+
+      <ul>
+      <% admin_flow.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :flow_type %>
+    <%= form.number_field :flow_type, id: :admin_flow_flow_type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :stage %>
+    <%= form.number_field :stage, id: :admin_flow_stage %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role_id %>
+    <%= form.number_field :role_id, id: :admin_flow_role_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
