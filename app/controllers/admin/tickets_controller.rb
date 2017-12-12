@@ -25,6 +25,11 @@ class Admin::TicketsController < ApplicationController
   # POST /admin/tickets.json
   def create
     @admin_ticket = Admin::Ticket.new(admin_ticket_params)
+    # print(admin_ticket_params)
+    print("############### AQUIMANO")
+    print(admin_ticket_params)
+    flow = Admin::Flow.create(flow_type: admin_ticket_params["ticket_type"], stage: 1, role_id: 1)
+    @admin_ticket.flow = flow
 
     respond_to do |format|
       if @admin_ticket.save
@@ -69,6 +74,6 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
-      params.require(:admin_ticket).permit(:flow_id, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :report)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :report)
     end
 end

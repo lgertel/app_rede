@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20171212134949) do
 
   create_table "admin_tickets", force: :cascade do |t|
     t.integer "flow_id"
+    t.integer "ticket_type"
     t.string "cnpj"
     t.string "name"
     t.string "description"

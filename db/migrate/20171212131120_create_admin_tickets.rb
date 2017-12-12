@@ -2,6 +2,7 @@ class CreateAdminTickets < ActiveRecord::Migration[5.1]
   def change
     create_table :admin_tickets do |t|
       t.integer :flow_id
+      t.integer :ticket_type
       t.string :cnpj
       t.string :name
       t.string :description
