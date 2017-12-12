@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   devise_for :users, class_name: "Admin::User"
 
   namespace :admin do
@@ -7,5 +9,5 @@ Rails.application.routes.draw do
     resources :tickets
   end
 
-  root to: "users#index"
+  root to: "home#index"
 end

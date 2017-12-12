@@ -20,6 +20,7 @@ class Admin::TicketsController < ApplicationController
 
   # GET /admin/tickets/1/edit
   def edit
+    authorize! :edit, Admin::Ticket
   end
 
   # POST /admin/tickets
@@ -28,7 +29,9 @@ class Admin::TicketsController < ApplicationController
     authorize! :create, Admin::Ticket
 
     @admin_ticket = Admin::Ticket.new(admin_ticket_params)
-    flow = Admin::Flow.create(flow_type: admin_ticket_params["ticket_type"], stage: 1, role_id: 1)
+    print(current_user.roles.inspect)
+    role = current_user.roles.first
+    flow = Admin::Flow.create(flow_type: admin_ticket_params["ticket_type"], stage: 1, role_id: role.id)
     @admin_ticket.flow = flow
 
     respond_to do |format|
@@ -45,6 +48,8 @@ class Admin::TicketsController < ApplicationController
   # PATCH/PUT /admin/tickets/1
   # PATCH/PUT /admin/tickets/1.json
   def update
+    authorize! :update, Admin::Ticket
+
     respond_to do |format|
       if @admin_ticket.update(admin_ticket_params)
         format.html { redirect_to @admin_ticket, notice: 'Ticket was successfully updated.' }
@@ -59,6 +64,8 @@ class Admin::TicketsController < ApplicationController
   # DELETE /admin/tickets/1
   # DELETE /admin/tickets/1.json
   def destroy
+    authorize! :destroy, Admin::Ticket
+
     @admin_ticket.destroy
     respond_to do |format|
       format.html { redirect_to admin_tickets_url, notice: 'Ticket was successfully destroyed.' }
