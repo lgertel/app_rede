@@ -25,12 +25,13 @@ class Admin::TicketsController < ApplicationController
   # POST /admin/tickets
   # POST /admin/tickets.json
   def create
-    authorize! :create, @admin_ticket
+    # print("AQUI MANO VELHO")
+    # print(current_user.inspect)
+    # print(current_user.roles.inspect)
+    #
+    authorize! :create, Admin::Ticket
 
     @admin_ticket = Admin::Ticket.new(admin_ticket_params)
-    # print(admin_ticket_params)
-    print("############### AQUIMANO")
-    print(admin_ticket_params)
     flow = Admin::Flow.create(flow_type: admin_ticket_params["ticket_type"], stage: 1, role_id: 1)
     @admin_ticket.flow = flow
 
