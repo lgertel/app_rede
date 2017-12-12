@@ -5,12 +5,27 @@ class Admin::TicketsController < ApplicationController
   # GET /admin/tickets
   # GET /admin/tickets.json
   def index
-    @admin_tickets = Admin::Ticket.all
+    authorize! :read, Admin::Ticket
+
+    @admin_tickets = Admin::Ticket.accessible_by(current_ability, :read)
+    # if current_user.has_role? :eps
+    #   tickets = []
+    #   @admin_tickets.each do |ticket|
+    #     if ticket.flow.flow_type == 1
+    #       if ticket.flow.stage == 1
+    #         tickets.push(ticket)
+    #       end
+    #     end
+    #   end
+    #
+    #   @admin_tickets = tickets
+    # end
   end
 
   # GET /admin/tickets/1
   # GET /admin/tickets/1.json
   def show
+
   end
 
   # GET /admin/tickets/new
