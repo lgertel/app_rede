@@ -1,4 +1,5 @@
 class Admin::TicketsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_admin_ticket, only: [:show, :edit, :update, :destroy]
 
   # GET /admin/tickets
@@ -24,6 +25,8 @@ class Admin::TicketsController < ApplicationController
   # POST /admin/tickets
   # POST /admin/tickets.json
   def create
+    authorize! :create, @admin_ticket
+
     @admin_ticket = Admin::Ticket.new(admin_ticket_params)
     # print(admin_ticket_params)
     print("############### AQUIMANO")

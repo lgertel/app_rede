@@ -39,6 +39,9 @@ gem 'devise'
 # Use cancan to basic role management
 gem 'cancan'
 
+# Use Rolify to roles
+gem 'rolify'
+
 # Use Twitter bootstrap to theme
 gem 'twitter-bootstrap-rails'
 
