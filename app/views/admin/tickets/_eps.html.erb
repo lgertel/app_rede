@@ -1,36 +1,33 @@
 <% if current_user.has_role? :eps %>
-  <p>
-    <strong>Cnpj:</strong>
-    <%= @admin_ticket.cnpj %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= @admin_ticket.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @admin_ticket.description %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= @admin_ticket.city %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= @admin_ticket.state %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= @admin_ticket.address %>
-  </p>
-
-  <div class="field">
-    <%= form.label :audio %>
-    <%= form.file_field :audio, id: :admin_ticket_audio %>
-  </div>
+<table>
+  <td>
+    <tr>
+      <td><b>CNPJ:</b></td>
+      <td><%= @admin_ticket.cnpj %></td>
+    </tr>
+    <tr>
+      <td><b>Nome:</b></td>
+      <td><%= @admin_ticket.name %></td>
+    </tr>
+    <tr>
+      <td><b>Descrição:</b></td>
+      <td><%= @admin_ticket.description %></td>
+    </tr>
+    <tr>
+      <td><b>Cidade:</b></td>
+      <td><%= @admin_ticket.city %></td>
+    </tr>
+    <tr>
+      <td><b>Estado:</b></td>
+      <td><%= @admin_ticket.state %></td>
+    </tr>
+    <tr>
+      <td><b>Endereço:</b></td>
+      <td><%= @admin_ticket.address %></td>
+    </tr>
+    <tr>
+      <td><b><%= form.label :audio %></b></td>
+      <td><%= form.file_field :audio, id: :admin_ticket_audio %></td>
+    </tr>
+</table>
 <% end %>
