@@ -16,55 +16,177 @@
     <!--<%= form.number_field :flow_id, id: :admin_ticket_flow_id %>-->
   <!--</div>-->
 
-  <div class="field">
-    <%= form.label :ticket_type %>
-    <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
-  </div>
+  <% if current_user.has_role? :atendimento %>
+    <div class="field">
+      <%= form.label :ticket_type %>
+      <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
+    </div>
 
-  <div class="field">
-    <%= form.label :cnpj %>
-    <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
-  </div>
+    <div class="field">
+      <%= form.label :cnpj %>
+      <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :admin_ticket_name %>
-  </div>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :admin_ticket_name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :admin_ticket_description %>
-  </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description, id: :admin_ticket_description %>
+    </div>
 
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city, id: :admin_ticket_city %>
-  </div>
+    <div class="field">
+      <%= form.label :city %>
+      <%= form.text_field :city, id: :admin_ticket_city %>
+    </div>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state, id: :admin_ticket_state %>
-  </div>
+    <div class="field">
+      <%= form.label :state %>
+      <%= form.text_field :state, id: :admin_ticket_state %>
+    </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :admin_ticket_address %>
-  </div>
+    <div class="field">
+      <%= form.label :address %>
+      <%= form.text_field :address, id: :admin_ticket_address %>
+    </div>
+  <% end %>
 
-  <!--<div class="field">-->
-    <!--<%= form.label :audio %>-->
-    <!--<%= form.text_field :audio, id: :admin_ticket_audio %>-->
-  <!--</div>-->
+  <% if current_user.has_role? :eps %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
 
-  <!--<div class="field">-->
-    <!--<%= form.label :dossier %>-->
-    <!--<%= form.text_field :dossier, id: :admin_ticket_dossier %>-->
-  <!--</div>-->
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
 
-  <!--<div class="field">-->
-    <!--<%= form.label :report %>-->
-    <!--<%= form.text_field :report, id: :admin_ticket_report %>-->
-  <!--</div>-->
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <div class="field">
+      <%= form.label :audio %>
+      <%= form.text_field :audio, id: :admin_ticket_audio %>
+    </div>
+  <% end %>
+
+  <% if current_user.has_role? :backoffice %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <p>
+      <strong>Audio:</strong>
+      <%= @admin_ticket.audio %>
+    </p>
+
+    <div class="field">
+    <%= form.label :dossier %>
+    <%= form.text_field :dossier, id: :admin_ticket_dossier %>
+    </div>
+  <% end %>
+
+  <% if current_user.has_role? :n2 %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <p>
+      <strong>Audio:</strong>
+      <%= @admin_ticket.audio %>
+    </p>
+
+    <p>
+      <strong>Dossier:</strong>
+      <%= @admin_ticket.dossier %>
+    </p>
+
+    <% if @admin_ticket.flow.stage == 3 %>
+      Aprovar Dossier
+    <% end %>
+
+    <% if @admin_ticket.flow.stage == 4 %>
+      <div class="field">
+        <%= form.label :report %>
+        <%= form.text_field :report, id: :admin_ticket_report %>
+      </div>
+    <% end %>
+
+
+  <% end %>
+
 
   <div class="actions">
     <%= form.submit %>

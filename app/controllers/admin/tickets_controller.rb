@@ -8,18 +8,6 @@ class Admin::TicketsController < ApplicationController
     authorize! :read, Admin::Ticket
 
     @admin_tickets = Admin::Ticket.accessible_by(current_ability, :read)
-    # if current_user.has_role? :eps
-    #   tickets = []
-    #   @admin_tickets.each do |ticket|
-    #     if ticket.flow.flow_type == 1
-    #       if ticket.flow.stage == 1
-    #         tickets.push(ticket)
-    #       end
-    #     end
-    #   end
-    #
-    #   @admin_tickets = tickets
-    # end
   end
 
   # GET /admin/tickets/1
@@ -30,6 +18,8 @@ class Admin::TicketsController < ApplicationController
 
   # GET /admin/tickets/new
   def new
+    authorize! :create, Admin::Ticket
+
     @admin_ticket = Admin::Ticket.new
   end
 
@@ -65,8 +55,12 @@ class Admin::TicketsController < ApplicationController
   def update
     authorize! :update, Admin::Ticket
 
+    flow = @admin_ticket.flow
+    flow.stage += 1
+    flow.role_id = current_user.roles.first.id
+
     respond_to do |format|
-      if @admin_ticket.update(admin_ticket_params)
+      if @admin_ticket.update(admin_ticket_params) && flow.save
         format.html { redirect_to @admin_ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_ticket }
       else
