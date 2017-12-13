@@ -180,7 +180,8 @@
     <% if @admin_ticket.flow.stage == 4 %>
       <div class="field">
         <%= form.label :report %>
-        <%= form.text_field :report, id: :admin_ticket_report %>
+        <!--<%= form.text_field :report, id: :admin_ticket_report %>-->
+        <%= form.file_field :report, id: :admin_ticket_report %>
       </div>
     <% end %>
 

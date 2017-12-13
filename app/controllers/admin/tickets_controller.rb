@@ -55,12 +55,22 @@ class Admin::TicketsController < ApplicationController
   def update
     authorize! :update, Admin::Ticket
 
+    params = admin_ticket_params
+
+    n2_role = current_user.has_role? :n2
+    if @admin_ticket.flow.stage == 4 && n2_role
+      report = admin_ticket_params[:report]
+      upload_file(report)
+      admin_ticket_params[:report] = report.original_filename
+      params[:report] = admin_ticket_params[:report].original_filename
+    end
+
     flow = @admin_ticket.flow
     flow.stage += 1
     flow.role_id = current_user.roles.first.id
 
     respond_to do |format|
-      if @admin_ticket.update(admin_ticket_params) && flow.save
+      if @admin_ticket.update(params) && flow.save
         format.html { redirect_to @admin_ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @admin_ticket }
       else
@@ -91,5 +101,11 @@ class Admin::TicketsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
       params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :report)
+    end
+
+    def upload_file(io)
+      File.open(Rails.root.join('public', 'uploads', io.original_filename), 'wb') do |file|
+        file.write(io.read)
+      end
     end
 end
