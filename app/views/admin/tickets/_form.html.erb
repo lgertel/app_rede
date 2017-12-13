@@ -174,6 +174,44 @@
     <% end %>
 
     <% if @admin_ticket.flow.stage == 4 %>
+      <p>
+        <strong>Dossier Status:</strong>
+        <%= @admin_ticket.dossier_status %>
+      </p>
+      <div class="field">
+        <%= form.label :debits_status %>
+        <%= select_tag 'admin_ticket[debits_status]', options_for_select([['-', 0], ['Excluir Débitos', 1]]) %>
+      </div>
+    <% end %>
+
+    <% if @admin_ticket.flow.stage == 5 %>
+      <p>
+        <strong>Dossier Status:</strong>
+        <%= @admin_ticket.dossier_status %>
+      </p>
+      <p>
+        <strong>Debit Status:</strong>
+        <%= @admin_ticket.debits_status %>
+      </p>
+      <div class="field">
+        <%= form.label :comercial_status %>
+        <%= select_tag 'admin_ticket[comercial_status]', options_for_select([['-', 0], ['Ajustar Condição Comercial', 1]]) %>
+      </div>
+    <% end %>
+
+    <% if @admin_ticket.flow.stage == 6 %>
+      <p>
+        <strong>Dossier Status:</strong>
+        <%= @admin_ticket.dossier_status %>
+      </p>
+      <p>
+        <strong>Debit Status:</strong>
+        <%= @admin_ticket.debits_status %>
+      </p>
+      <p>
+        <strong>Comercial Status:</strong>
+        <%= @admin_ticket.comercial_status %>
+      </p>
       <div class="field">
         <%= form.label :report %>
         <!--<%= form.text_field :report, id: :admin_ticket_report %>-->

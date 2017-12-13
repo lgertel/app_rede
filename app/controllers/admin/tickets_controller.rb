@@ -55,9 +55,6 @@ class Admin::TicketsController < ApplicationController
   def update
     authorize! :update, Admin::Ticket
 
-    print("CARALOSO ##############################")
-    print(admin_ticket_params)
-    print("##############################")
     params = admin_ticket_params
     plus_step = true
 
@@ -79,17 +76,12 @@ class Admin::TicketsController < ApplicationController
 
     n2_role = current_user.has_role? :n2
     if @admin_ticket.flow.stage == 3 && n2_role
-
-      print("CARALESO ##############################")
-      print(params)
-      print("##############################")
       if params[:dossier_status] == "0"
-        print("VO FUDE ESSA PORRA")
         plus_step = false
       end
     end
 
-    if @admin_ticket.flow.stage == 4 && n2_role
+    if @admin_ticket.flow.stage == 6 && n2_role
       report = admin_ticket_params[:report]
       upload_file(report)
       admin_ticket_params[:report] = report.original_filename
@@ -135,9 +127,7 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
-      print("CERTO VALIDANDO PARAMETROS")
-      print(params)
-      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :report)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :report)
     end
 
     def upload_file(io)
