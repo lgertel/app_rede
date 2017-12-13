@@ -52,6 +52,9 @@ ActiveRecord::Schema.define(version: 20171212172331) do
     t.boolean "consolidate_schedule"
     t.boolean "rollout_approve_installation"
     t.string "report"
+    t.string "dt_one"
+    t.string "dt_two"
+    t.string "dt_three"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

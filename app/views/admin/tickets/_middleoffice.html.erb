@@ -68,5 +68,102 @@
 
     <%= form.label :consolidate_schedule %>
     <%= select_tag 'admin_ticket[consolidate_schedule]', options_for_select([['Aprovar', 1]]) %>
+
+    <table>
+      <tbody>
+      <tr>
+        <td>PV</td>
+        <td>Cliente</td>
+        <td>
+          <div>DataCancelamentoPV</div>
+        </td>
+        <td>FCT</td>
+        <td>Terminal</td>
+        <td>TipoEquipamento</td>
+        <td>TipoFCT</td>
+        <td>SituacaFCT</td>
+        <td>Dth_CadastroFCT</td>
+        <td>Endereco</td>
+        <td>Numero</td>
+        <td>Complemento</td>
+        <td>Bairro</td>
+        <td>Cidade</td>
+        <td>Estado</td>
+        <td>DDD</td>
+        <td>Telefone</td>
+        <td>PessoaContato</td>
+        <td dir="ltr">Data</td>
+      </tr>
+      <tr style="height:19px;">
+        <td>140907556</td>
+        <td>25940104</td>
+        <td>2016-03-17</td>
+        <td>29050</td>
+        <td>        </td>
+        <td>PDV</td>
+        <td>INSTALACAO</td>
+        <td>
+          <div>MICROFILMADA</div>
+        </td>
+        <td>12/10/1998</td>
+        <td>AV IGUATEMI</td>
+        <td>777</td>
+        <td>Q 6 LJ 7 PISO 2</td>
+        <td>VL BRANOIN</td>
+        <td>CAMPINAS</td>
+        <td>SP</td>
+        <td></td>
+        <td></td>
+        <td>LAERCIO</td>
+        <td><%= @admin_ticket.dt_one %></td>
+      </tr>
+      <tr>
+        <td>33251</td>
+        <td>25940104</td>
+        <td>2014-01-07</td>
+        <td>29060</td>
+        <td>        </td>
+        <td>PDV</td>
+        <td>INSTALACAO</td>
+        <td>
+          <div>MICROFILMADA</div>
+        </td>
+        <td>12/10/1998</td>
+        <td>PC PANAMERICA</td>
+        <td>50</td>
+        <td>                    </td>
+        <td>ALTO PINHEIROS</td>
+        <td>SAO PAULO</td>
+        <td>SP</td>
+        <td>011</td>
+        <td>8139694</td>
+        <td>RICARDO</td>
+        <td><%= @admin_ticket.dt_two %></td>
+      </tr>
+      <tr>
+        <td>9737332</td>
+        <td>25940104</td>
+        <td>2014-01-07</td>
+        <td>29070</td>
+        <td>        </td>
+        <td>PDV</td>
+        <td>INSTALACAO</td>
+        <td>
+          <div>MICROFILMADA</div>
+        </td>
+        <td>12/10/1998</td>
+        <td>AV IBIRAPUERA</td>
+        <td>3103</td>
+        <td>LJ 10</td>
+        <td>MOEMA</td>
+        <td>SAO PAULO</td>
+        <td>SP</td>
+        <td>011</td>
+        <td>6962700</td>
+        <td>RONALDO</td>
+        <td><%= @admin_ticket.dt_three %></td>
+      </tr>
+      </tbody>
+    </table>
   <% end %>
 <% end %>
