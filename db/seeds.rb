@@ -7,7 +7,8 @@ users = [
     ['middleoffice', 'middleoffice@rede.com.br', 'm1ddl3off1c3', 'middleoffice'],
     ['cliente', 'cliente@rede.com.br', 'cl13nt3', 'cliente'],
     ['log_interna', 'log_interna@rede.com.br', 'log1nt3rn4', 'log_interna'],
-    ['log_externa', 'log_externa@rede.com.br', 'log3xt3rn4', 'log_externa']
+    ['log_externa', 'log_externa@rede.com.br', 'log3xt3rn4', 'log_externa'],
+    ['prestador', 'prestador_servico@rede.com.br', 'pr3st4d0r', 'pservico']
 ]
 
 users.each do |name, email, password, role|

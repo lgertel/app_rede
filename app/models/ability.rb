@@ -17,8 +17,15 @@ class Ability
     elsif user.has_role? :middleoffice
       can :read, Admin::Ticket
       can :create, Admin::Ticket
+      can :update, Admin::Ticket, id: Admin::Ticket.middleoffice.map{ |ticket| ticket.id }
     elsif user.has_role? :cliente
       can [:read, :update], Admin::Ticket, id: Admin::Ticket.cliente.map{ |ticket| ticket.id }
+    elsif user.has_role? :log_interna
+      can [:read, :update], Admin::Ticket, id: Admin::Ticket.log_interna.map{ |ticket| ticket.id }
+    elsif user.has_role? :log_externa
+      can [:read, :update], Admin::Ticket, id: Admin::Ticket.log_externa.map{ |ticket| ticket.id }
+    elsif user.has_role? :pservico
+      can [:read, :update], Admin::Ticket, id: Admin::Ticket.pservico.map{ |ticket| ticket.id }
     end
   end
 end

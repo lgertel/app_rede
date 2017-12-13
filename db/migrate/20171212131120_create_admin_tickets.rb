@@ -15,6 +15,11 @@ class CreateAdminTickets < ActiveRecord::Migration[5.1]
       t.boolean :debits_status
       t.boolean :comercial_status
       t.boolean :rollout_customer_validate
+      t.boolean :rollout_customer_verification
+      t.boolean :rollout_eps_details
+      t.boolean :rollout_date_inform
+      t.boolean :consolidate_schedule
+      t.boolean :rollout_approve_installation
       t.string :report
 
       t.timestamps

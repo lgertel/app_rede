@@ -56,6 +56,7 @@ class Admin::TicketsController < ApplicationController
 
     params = admin_ticket_params
     plus_step = true
+    jump_steps = 0
 
     eps_role = current_user.has_role? :eps
     if @admin_ticket.flow.stage == 1 && eps_role
@@ -77,6 +78,7 @@ class Admin::TicketsController < ApplicationController
     if @admin_ticket.flow.stage == 3 && n2_role
       if params[:dossier_status] == "0"
         plus_step = false
+        jump_steps = 1
       end
     end
 
@@ -89,11 +91,19 @@ class Admin::TicketsController < ApplicationController
       RentMailer.close_ticket_mail(current_user).deliver_now
     end
 
+    cliente_role = current_user.has_role? :cliente
+    if @admin_ticket.flow.stage == 6 && cliente_role
+      if params[:rollout_approve_installation] == "0"
+        plus_step = false
+        jump_steps = 2
+      end
+    end
+
     flow = @admin_ticket.flow
     if plus_step
       flow.stage += 1
     else
-      flow.stage -= 1
+      flow.stage -= jump_steps
     end
     flow.role_id = current_user.roles.first.id
 
@@ -128,7 +138,7 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
-      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :rollout_customer_validate, :report)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :rollout_customer_validate, :rollout_customer_verification, :rollout_eps_details, :rollout_date_inform, :consolidate_schedule, :rollout_approve_installation, :report)
     end
 
     def upload_file(io)

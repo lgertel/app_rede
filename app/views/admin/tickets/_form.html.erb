@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% if (current_user.has_role? :atendimento) || (current_user.has_role? :middleoffice) %>
+  <% if (current_user.has_role? :atendimento) %>
     <div class="field">
       <%= form.label :ticket_type %>
       <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
@@ -48,41 +48,174 @@
     </div>
   <% end %>
 
+  <% if (current_user.has_role? :middleoffice) %>
+
+    <% if @admin_ticket.flow.nil? %>
+      <div class="field">
+        <%= form.label :ticket_type %>
+        <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
+      </div>
+
+      <div class="field">
+        <%= form.label :cnpj %>
+        <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
+      </div>
+
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :admin_ticket_name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_field :description, id: :admin_ticket_description %>
+      </div>
+
+      <div class="field">
+        <%= form.label :city %>
+        <%= form.text_field :city, id: :admin_ticket_city %>
+      </div>
+
+      <div class="field">
+        <%= form.label :state %>
+        <%= form.text_field :state, id: :admin_ticket_state %>
+      </div>
+
+      <div class="field">
+        <%= form.label :address %>
+        <%= form.text_field :address, id: :admin_ticket_address %>
+      </div>
+    <% elsif @admin_ticket.flow.stage == 5 %>
+      <p>
+        <strong>Cnpj:</strong>
+        <%= @admin_ticket.cnpj %>
+      </p>
+
+      <p>
+        <strong>Name:</strong>
+        <%= @admin_ticket.name %>
+      </p>
+
+      <p>
+        <strong>Description:</strong>
+        <%= @admin_ticket.description %>
+      </p>
+
+      <p>
+        <strong>City:</strong>
+        <%= @admin_ticket.city %>
+      </p>
+
+      <p>
+        <strong>State:</strong>
+        <%= @admin_ticket.state %>
+      </p>
+
+      <p>
+        <strong>Address:</strong>
+        <%= @admin_ticket.address %>
+      </p>
+
+      <%= form.label :consolidate_schedule %>
+      <%= select_tag 'admin_ticket[consolidate_schedule]', options_for_select([['Aprovar', 1]]) %>
+    <% end %>
+  <% end %>
+
   <% if current_user.has_role? :cliente %>
-    <p>
-      <strong>Cnpj:</strong>
-      <%= @admin_ticket.cnpj %>
-    </p>
+    <% if @admin_ticket.flow.stage == 1 %>
+      <p>
+        <strong>Cnpj:</strong>
+        <%= @admin_ticket.cnpj %>
+      </p>
 
-    <p>
-      <strong>Name:</strong>
-      <%= @admin_ticket.name %>
-    </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @admin_ticket.name %>
+      </p>
 
-    <p>
-      <strong>Description:</strong>
-      <%= @admin_ticket.description %>
-    </p>
+      <p>
+        <strong>Description:</strong>
+        <%= @admin_ticket.description %>
+      </p>
 
-    <p>
-      <strong>City:</strong>
-      <%= @admin_ticket.city %>
-    </p>
+      <p>
+        <strong>City:</strong>
+        <%= @admin_ticket.city %>
+      </p>
 
-    <p>
-      <strong>State:</strong>
-      <%= @admin_ticket.state %>
-    </p>
+      <p>
+        <strong>State:</strong>
+        <%= @admin_ticket.state %>
+      </p>
 
-    <p>
-      <strong>Address:</strong>
-      <%= @admin_ticket.address %>
-    </p>
+      <p>
+        <strong>Address:</strong>
+        <%= @admin_ticket.address %>
+      </p>
 
-    <div class="field">
-      <%= form.label :rollout_customer_validate %>
-      <%= select_tag 'admin_ticket[rollout_customer_validate]', options_for_select([['Aprovar', 1]]) %>
-    </div>
+      <div class="field">
+        <%= form.label :rollout_customer_validate %>
+        <%= select_tag 'admin_ticket[rollout_customer_validate]', options_for_select([['Aprovar', 1]]) %>
+      </div>
+    <% end %>
+
+    <% if @admin_ticket.flow.stage == 6 %>
+      <p>
+        <strong>Cnpj:</strong>
+        <%= @admin_ticket.cnpj %>
+      </p>
+
+      <p>
+        <strong>Name:</strong>
+        <%= @admin_ticket.name %>
+      </p>
+
+      <p>
+        <strong>Description:</strong>
+        <%= @admin_ticket.description %>
+      </p>
+
+      <p>
+        <strong>City:</strong>
+        <%= @admin_ticket.city %>
+      </p>
+
+      <p>
+        <strong>State:</strong>
+        <%= @admin_ticket.state %>
+      </p>
+
+      <p>
+        <strong>Address:</strong>
+        <%= @admin_ticket.address %>
+      </p>
+
+      <p>
+        <strong>Rollout Customer Validate:</strong>
+        <%= @admin_ticket.rollout_customer_validate %>
+      </p>
+
+      <p>
+        <strong>Rollout Customer Verify:</strong>
+        <%= @admin_ticket.rollout_customer_verification %>
+      </p>
+
+      <p>
+        <strong>Rollout Eps Verify:</strong>
+        <%= @admin_ticket.rollout_eps_details %>
+      </p>
+
+      <p>
+        <strong>Rollout Consolidate Schedule:</strong>
+        <%= @admin_ticket.consolidate_schedule %>
+      </p>
+
+      <div class="field">
+        <%= form.label :rollout_approve_installation %>
+        <%= select_tag 'admin_ticket[rollout_approve_installation]', options_for_select([['Aprovar', 1], ['Rejeitar', 0]]) %>
+      </div>
+    <% end %>
+
   <% end %>
 
   <% if current_user.has_role? :eps %>
@@ -119,6 +252,48 @@
     <div class="field">
       <%= form.label :audio %>
       <%= form.file_field :audio, id: :admin_ticket_audio %>
+    </div>
+  <% end %>
+
+  <% if current_user.has_role? :log_interna %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Validate:</strong>
+      <%= @admin_ticket.rollout_customer_validate %>
+    </p>
+
+    <div class="field">
+      <%= form.label :rollout_customer_verification %>
+      <%= select_tag 'admin_ticket[rollout_customer_verification]', options_for_select([['Aprovar', 1]]) %>
     </div>
   <% end %>
 
@@ -161,6 +336,52 @@
     <div class="field">
       <%= form.label :dossier %>
       <%= form.file_field :dossier, id: :admin_ticket_dossier %>
+    </div>
+  <% end %>
+
+  <% if current_user.has_role? :log_externa %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Validate:</strong>
+      <%= @admin_ticket.rollout_customer_validate %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Verify:</strong>
+      <%= @admin_ticket.rollout_customer_verification %>
+    </p>
+    <div class="field">
+      <%= form.label :rollout_eps_details %>
+      <%= select_tag 'admin_ticket[rollout_eps_details]', options_for_select([['Aprovar', 1]]) %>
     </div>
   <% end %>
 
@@ -256,7 +477,58 @@
       </div>
     <% end %>
 
+  <% end %>
 
+  <% if current_user.has_role? :pservico %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Validate:</strong>
+      <%= @admin_ticket.rollout_customer_validate %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Verify:</strong>
+      <%= @admin_ticket.rollout_customer_verification %>
+    </p>
+
+    <p>
+      <strong>Rollout Eps Verify:</strong>
+      <%= @admin_ticket.rollout_eps_details %>
+    </p>
+
+    <div class="field">
+      <%= form.label :rollout_date_inform %>
+      <%= select_tag 'admin_ticket[rollout_date_inform]', options_for_select([['Aprovar', 1]]) %>
+    </div>
   <% end %>
 
 
