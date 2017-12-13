@@ -34,7 +34,6 @@ class Admin::TicketsController < ApplicationController
     authorize! :create, Admin::Ticket
 
     @admin_ticket = Admin::Ticket.new(admin_ticket_params)
-    print(current_user.roles.inspect)
     role = current_user.roles.first
     flow = Admin::Flow.create(flow_type: admin_ticket_params["ticket_type"], stage: 1, role_id: role.id)
     @admin_ticket.flow = flow
@@ -129,7 +128,7 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
-      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :report)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :rollout_customer_validate, :report)
     end
 
     def upload_file(io)

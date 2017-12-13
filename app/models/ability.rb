@@ -14,6 +14,11 @@ class Ability
     elsif user.has_role? :n2
       can :read, Admin::Ticket, id: Admin::Ticket.n2.map{ |ticket| ticket.id }
       can :update, Admin::Ticket, id: Admin::Ticket.n2.map{ |ticket| ticket.id }
+    elsif user.has_role? :middleoffice
+      can :read, Admin::Ticket
+      can :create, Admin::Ticket
+    elsif user.has_role? :cliente
+      can [:read, :update], Admin::Ticket, id: Admin::Ticket.cliente.map{ |ticket| ticket.id }
     end
   end
 end

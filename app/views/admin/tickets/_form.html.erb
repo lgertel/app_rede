@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <% if current_user.has_role? :atendimento %>
+  <% if (current_user.has_role? :atendimento) || (current_user.has_role? :middleoffice) %>
     <div class="field">
       <%= form.label :ticket_type %>
       <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
@@ -45,6 +45,43 @@
     <div class="field">
       <%= form.label :address %>
       <%= form.text_field :address, id: :admin_ticket_address %>
+    </div>
+  <% end %>
+
+  <% if current_user.has_role? :cliente %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <div class="field">
+      <%= form.label :rollout_customer_validate %>
+      <%= select_tag 'admin_ticket[rollout_customer_validate]', options_for_select([['Aprovar', 1]]) %>
     </div>
   <% end %>
 

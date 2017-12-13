@@ -12,4 +12,8 @@ class Admin::Ticket < ApplicationRecord
   scope :n2, -> {
     includes(:flow).where(admin_flows: {:flow_type => 1, :stage => [3, 4, 5, 6]})
   }
+
+  scope :cliente, -> {
+    includes(:flow).where(admin_flows: {:flow_type => 2, :stage => 1})
+  }
 end

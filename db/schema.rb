@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20171212172331) do
     t.boolean "dossier_status"
     t.boolean "debits_status"
     t.boolean "comercial_status"
+    t.boolean "rollout_customer_validate"
     t.string "report"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
