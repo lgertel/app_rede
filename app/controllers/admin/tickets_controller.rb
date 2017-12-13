@@ -86,6 +86,8 @@ class Admin::TicketsController < ApplicationController
       upload_file(report)
       admin_ticket_params[:report] = report.original_filename
       params[:report] = admin_ticket_params[:report].original_filename
+
+      RentMailer.close_ticket_mail(current_user).deliver_now
     end
 
     flow = @admin_ticket.flow
