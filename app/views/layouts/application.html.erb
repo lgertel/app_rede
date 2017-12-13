@@ -18,8 +18,11 @@
 
         Logged in as <strong><%= current_user.email %></strong>.
       <% else %>
-        <%= link_to "Sign up", new_user_registration_path %> |
         <%= link_to "Login", new_user_session_path %>
+      <% end %>
+
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
       <% end %>
 
       <%= yield %>
