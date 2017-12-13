@@ -56,8 +56,31 @@ class Admin::TicketsController < ApplicationController
     authorize! :update, Admin::Ticket
 
     params = admin_ticket_params
+    plus_step = true
+
+    eps_role = current_user.has_role? :eps
+    if @admin_ticket.flow.stage == 1 && eps_role
+      audio = admin_ticket_params[:audio]
+      upload_file(audio)
+      admin_ticket_params[:audio] = audio.original_filename
+      params[:audio] = admin_ticket_params[:audio].original_filename
+    end
+
+    backoffice_role = current_user.has_role? :backoffice
+    if @admin_ticket.flow.stage == 2 && backoffice_role
+      dossier = admin_ticket_params[:dossier]
+      upload_file(dossier)
+      admin_ticket_params[:dossier] = dossier.original_filename
+      params[:dossier] = admin_ticket_params[:dossier].original_filename
+    end
 
     n2_role = current_user.has_role? :n2
+    if @admin_ticket.flow.stage == 3 && n2_role
+      if params[:dossier_approval] == 0
+        plus_step = false
+      end
+    end
+
     if @admin_ticket.flow.stage == 4 && n2_role
       report = admin_ticket_params[:report]
       upload_file(report)
@@ -66,7 +89,11 @@ class Admin::TicketsController < ApplicationController
     end
 
     flow = @admin_ticket.flow
-    flow.stage += 1
+    if plus_step
+      flow.stage += 1
+    else
+      plus_step -= 1
+    end
     flow.role_id = current_user.roles.first.id
 
     respond_to do |format|
@@ -100,7 +127,9 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
-      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :report)
+      print("CERTO VALIDANDO PARAMETROS")
+      print(params)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :report, :dossier_approval)
     end
 
     def upload_file(io)
