@@ -11,11 +11,6 @@
     </div>
   <% end %>
 
-  <!--<div class="field">-->
-    <!--<%= form.label :flow_id %>-->
-    <!--<%= form.number_field :flow_id, id: :admin_ticket_flow_id %>-->
-  <!--</div>-->
-
   <% if current_user.has_role? :atendimento %>
     <div class="field">
       <%= form.label :ticket_type %>
@@ -127,8 +122,8 @@
     </p>
 
     <div class="field">
-    <%= form.label :dossier %>
-    <%= form.text_field :dossier, id: :admin_ticket_dossier %>
+      <%= form.label :dossier %>
+      <%= form.file_field :dossier, id: :admin_ticket_dossier %>
     </div>
   <% end %>
 
@@ -174,7 +169,8 @@
     </p>
 
     <% if @admin_ticket.flow.stage == 3 %>
-      Aprovar Dossier
+      <%= form.label :dossier_status %>
+      <%= select_tag 'admin_ticket[dossier_status]', options_for_select([['Aprovar', 1],  ['Recusar', 0]]) %>
     <% end %>
 
     <% if @admin_ticket.flow.stage == 4 %>

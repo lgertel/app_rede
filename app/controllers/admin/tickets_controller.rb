@@ -55,6 +55,9 @@ class Admin::TicketsController < ApplicationController
   def update
     authorize! :update, Admin::Ticket
 
+    print("CARALOSO ##############################")
+    print(admin_ticket_params)
+    print("##############################")
     params = admin_ticket_params
     plus_step = true
 
@@ -76,7 +79,12 @@ class Admin::TicketsController < ApplicationController
 
     n2_role = current_user.has_role? :n2
     if @admin_ticket.flow.stage == 3 && n2_role
-      if params[:dossier_approval] == 0
+
+      print("CARALESO ##############################")
+      print(params)
+      print("##############################")
+      if params[:dossier_status] == "0"
+        print("VO FUDE ESSA PORRA")
         plus_step = false
       end
     end
@@ -92,7 +100,7 @@ class Admin::TicketsController < ApplicationController
     if plus_step
       flow.stage += 1
     else
-      plus_step -= 1
+      flow.stage -= 1
     end
     flow.role_id = current_user.roles.first.id
 
@@ -129,7 +137,7 @@ class Admin::TicketsController < ApplicationController
     def admin_ticket_params
       print("CERTO VALIDANDO PARAMETROS")
       print(params)
-      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :report, :dossier_approval)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :report)
     end
 
     def upload_file(io)

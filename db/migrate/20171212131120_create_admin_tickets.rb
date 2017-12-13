@@ -11,6 +11,7 @@ class CreateAdminTickets < ActiveRecord::Migration[5.1]
       t.string :address
       t.string :audio
       t.string :dossier
+      t.boolean :dossier_status
       t.string :report
 
       t.timestamps

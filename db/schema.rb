@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171212172331) do
     t.string "address"
     t.string "audio"
     t.string "dossier"
+    t.boolean "dossier_status"
     t.string "report"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
