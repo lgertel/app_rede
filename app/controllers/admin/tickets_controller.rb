@@ -138,7 +138,7 @@ class Admin::TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_ticket_params
-      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :rollout_customer_validate, :rollout_customer_verification, :rollout_eps_details, :rollout_date_inform, :consolidate_schedule, :rollout_approve_installation, :report)
+      params.require(:admin_ticket).permit(:flow_id, :ticket_type, :cnpj, :name, :description, :city, :state, :address, :audio, :dossier, :dossier_status, :debits_status, :comercial_status, :rollout_customer_validate, :rollout_customer_verification, :rollout_eps_details, :rollout_date_inform, :consolidate_schedule, :rollout_approve_installation, :report, :dt_one, :dt_two, :dt_three)
     end
 
     def upload_file(io)

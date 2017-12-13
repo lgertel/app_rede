@@ -21,6 +21,9 @@ class CreateAdminTickets < ActiveRecord::Migration[5.1]
       t.boolean :consolidate_schedule
       t.boolean :rollout_approve_installation
       t.string :report
+      t.string :dt_one
+      t.string :dt_two
+      t.string :dt_three
 
       t.timestamps
     end
