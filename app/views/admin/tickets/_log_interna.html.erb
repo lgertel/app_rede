@@ -1,0 +1,41 @@
+<% if current_user.has_role? :log_interna %>
+  <p>
+    <strong>Cnpj:</strong>
+    <%= @admin_ticket.cnpj %>
+  </p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @admin_ticket.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @admin_ticket.description %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @admin_ticket.city %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= @admin_ticket.state %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @admin_ticket.address %>
+  </p>
+
+  <p>
+    <strong>Rollout Customer Validate:</strong>
+    <%= @admin_ticket.rollout_customer_validate %>
+  </p>
+
+  <div class="field">
+    <%= form.label :rollout_customer_verification %>
+    <%= select_tag 'admin_ticket[rollout_customer_verification]', options_for_select([['Aprovar', 1]]) %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<% if (current_user.has_role? :atendimento) %>
+  <div class="field">
+    <%= form.label :ticket_type %>
+    <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cnpj %>
+    <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :admin_ticket_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :admin_ticket_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :admin_ticket_city %>
+  </div>
+
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.text_field :state, id: :admin_ticket_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address, id: :admin_ticket_address %>
+  </div>
+<% end %>

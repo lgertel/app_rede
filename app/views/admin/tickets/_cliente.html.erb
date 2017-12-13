@@ -1,0 +1,96 @@
+<% if current_user.has_role? :cliente %>
+  <% if @admin_ticket.flow.stage == 1 %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <div class="field">
+      <%= form.label :rollout_customer_validate %>
+      <%= select_tag 'admin_ticket[rollout_customer_validate]', options_for_select([['Aprovar', 1]]) %>
+    </div>
+  <% end %>
+
+  <% if @admin_ticket.flow.stage == 6 %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Validate:</strong>
+      <%= @admin_ticket.rollout_customer_validate %>
+    </p>
+
+    <p>
+      <strong>Rollout Customer Verify:</strong>
+      <%= @admin_ticket.rollout_customer_verification %>
+    </p>
+
+    <p>
+      <strong>Rollout Eps Verify:</strong>
+      <%= @admin_ticket.rollout_eps_details %>
+    </p>
+
+    <p>
+      <strong>Rollout Consolidate Schedule:</strong>
+      <%= @admin_ticket.consolidate_schedule %>
+    </p>
+
+    <div class="field">
+      <%= form.label :rollout_approve_installation %>
+      <%= select_tag 'admin_ticket[rollout_approve_installation]', options_for_select([['Aprovar', 1], ['Rejeitar', 0]]) %>
+    </div>
+  <% end %>
+
+<% end %>

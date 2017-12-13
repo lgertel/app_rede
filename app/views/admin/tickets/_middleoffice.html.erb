@@ -1,0 +1,72 @@
+<% if (current_user.has_role? :middleoffice) %>
+
+  <% if @admin_ticket.flow.nil? %>
+    <div class="field">
+      <%= form.label :ticket_type %>
+      <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
+    </div>
+
+    <div class="field">
+      <%= form.label :cnpj %>
+      <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
+    </div>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :admin_ticket_name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_field :description, id: :admin_ticket_description %>
+    </div>
+
+    <div class="field">
+      <%= form.label :city %>
+      <%= form.text_field :city, id: :admin_ticket_city %>
+    </div>
+
+    <div class="field">
+      <%= form.label :state %>
+      <%= form.text_field :state, id: :admin_ticket_state %>
+    </div>
+
+    <div class="field">
+      <%= form.label :address %>
+      <%= form.text_field :address, id: :admin_ticket_address %>
+    </div>
+  <% elsif @admin_ticket.flow.stage == 5 %>
+    <p>
+      <strong>Cnpj:</strong>
+      <%= @admin_ticket.cnpj %>
+    </p>
+
+    <p>
+      <strong>Name:</strong>
+      <%= @admin_ticket.name %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @admin_ticket.description %>
+    </p>
+
+    <p>
+      <strong>City:</strong>
+      <%= @admin_ticket.city %>
+    </p>
+
+    <p>
+      <strong>State:</strong>
+      <%= @admin_ticket.state %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @admin_ticket.address %>
+    </p>
+
+    <%= form.label :consolidate_schedule %>
+    <%= select_tag 'admin_ticket[consolidate_schedule]', options_for_select([['Aprovar', 1]]) %>
+  <% end %>
+<% end %>

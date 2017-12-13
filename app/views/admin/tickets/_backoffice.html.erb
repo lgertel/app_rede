@@ -1,0 +1,41 @@
+<% if current_user.has_role? :backoffice %>
+  <p>
+    <strong>Cnpj:</strong>
+    <%= @admin_ticket.cnpj %>
+  </p>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @admin_ticket.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @admin_ticket.description %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @admin_ticket.city %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= @admin_ticket.state %>
+  </p>
+
+  <p>
+    <strong>Address:</strong>
+    <%= @admin_ticket.address %>
+  </p>
+
+  <p>
+    <strong>Audio:</strong>
+    <%= @admin_ticket.audio %>
+  </p>
+
+  <div class="field">
+    <%= form.label :dossier %>
+    <%= form.file_field :dossier, id: :admin_ticket_dossier %>
+  </div>
+<% end %>
