@@ -1,54 +1,6 @@
 <p id="notice"><%= notice %></p>
+<div style="position: relative; left: 20px"><h1><b>Ticket <%= @admin_ticket.id %> enviado para próxima etapa</b></h1></div>
 
-<p>
-  <strong>Flow:</strong>
-  <%= @admin_ticket.flow_id %>
-</p>
-
-<p>
-  <strong>Cnpj:</strong>
-  <%= @admin_ticket.cnpj %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @admin_ticket.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @admin_ticket.description %>
-</p>
-
-<p>
-  <strong>City:</strong>
-  <%= @admin_ticket.city %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @admin_ticket.state %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @admin_ticket.address %>
-</p>
-
-<p>
-  <strong>Audio:</strong>
-  <%= @admin_ticket.audio %>
-</p>
-
-<p>
-  <strong>Dossier:</strong>
-  <%= @admin_ticket.dossier %>
-</p>
-
-<p>
-  <strong>Report:</strong>
-  <%= @admin_ticket.report %>
-</p>
-
-<%= link_to 'Edit', edit_admin_ticket_path(@admin_ticket) %> |
-<%= link_to 'Back', admin_tickets_path %>
+<div style="position: relative; left: 50px;">
+  <%= link_to 'Voltar para consulta', admin_tickets_path %>
+</div>

@@ -1,134 +1,127 @@
 <% if current_user.has_role? :log_interna %>
-  <p>
-    <strong>Cnpj:</strong>
-    <%= @admin_ticket.cnpj %>
-  </p>
+<style>
+.list table, .list tr, .list th, .list td, .list thead, .list tbody {
+  border: 1px silver solid;
+}
+.list a {
+  color: #FF7800;
+}
+.list a:hover {
+  color: #FF7800;
+}
+</style>
+  <div style="position: relative; left: 50px">
+      <table>
+        <td>
+          <tr>
+            <td><b>CNPJ:</b></td>
+            <td><%= @admin_ticket.cnpj %></td>
+          </tr>
+          <tr>
+            <td><b>Nome:</b></td>
+            <td><%= @admin_ticket.name %></td>
+          </tr>
+          <tr>
+            <td><b>Descrição:</b></td>
+            <td><%= @admin_ticket.description %></td>
+          </tr>
+          <tr>
+            <td><b>Cidade:</b></td>
+            <td><%= @admin_ticket.city %></td>
+          </tr>
+          <tr>
+            <td><b>Estado:</b></td>
+            <td><%= @admin_ticket.state %></td>
+          </tr>
+          <tr>
+            <td><b>Endereço:</b></td>
+            <td><%= @admin_ticket.address %></td>
+          </tr>
+          <tr>
+            <td><b>Aprovar relatório?</b></td>
+            <td>
+              <% if @admin_ticket.rollout_customer_validate %>
+                Aprovado
+              <% else %>
+                Reprovado
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td><b>Confirmar disponibilidade:</b></td>
+            <td><%= select_tag 'admin_ticket[rollout_customer_verification]', options_for_select([['Sim', 1]]) %></td>
+          </tr>
+      </table>
+    </div>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @admin_ticket.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= @admin_ticket.description %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= @admin_ticket.city %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= @admin_ticket.state %>
-  </p>
-
-  <p>
-    <strong>Address:</strong>
-    <%= @admin_ticket.address %>
-  </p>
-
-  <p>
-    <strong>Rollout Customer Validate:</strong>
-    <%= @admin_ticket.rollout_customer_validate %>
-  </p>
-
-  <div class="field">
-    <%= form.label :rollout_customer_verification %>
-    <%= select_tag 'admin_ticket[rollout_customer_verification]', options_for_select([['Aprovar', 1]]) %>
-  </div>
-
-  <table>
-    <tbody>
-    <tr>
-      <td>PV</td>
-      <td>Cliente</td>
-      <td>
-        <div>DataCancelamentoPV</div>
-      </td>
-      <td>FCT</td>
-      <td>Terminal</td>
-      <td>TipoEquipamento</td>
-      <td>TipoFCT</td>
-      <td>SituacaFCT</td>
-      <td>Dth_CadastroFCT</td>
-      <td>Endereco</td>
-      <td>Numero</td>
-      <td>Complemento</td>
-      <td>Bairro</td>
-      <td>Cidade</td>
-      <td>Estado</td>
-      <td>DDD</td>
-      <td>Telefone</td>
-      <td>PessoaContato</td>
-    </tr>
-    <tr style="height:19px;">
-      <td>140907556</td>
-      <td>25940104</td>
-      <td>2016-03-17</td>
-      <td>29050</td>
-      <td>        </td>
-      <td>PDV</td>
-      <td>INSTALACAO</td>
-      <td>
-        <div>MICROFILMADA</div>
-      </td>
-      <td>12/10/1998</td>
-      <td>AV IGUATEMI</td>
-      <td>777</td>
-      <td>Q 6 LJ 7 PISO 2</td>
-      <td>VL BRANOIN</td>
-      <td>CAMPINAS</td>
-      <td>SP</td>
-      <td></td>
-      <td></td>
-      <td>LAERCIO</td>
-    </tr>
-    <tr>
-      <td>33251</td>
-      <td>25940104</td>
-      <td>2014-01-07</td>
-      <td>29060</td>
-      <td>        </td>
-      <td>PDV</td>
-      <td>INSTALACAO</td>
-      <td>
-        <div>MICROFILMADA</div>
-      </td>
-      <td>12/10/1998</td>
-      <td>PC PANAMERICA</td>
-      <td>50</td>
-      <td>                    </td>
-      <td>ALTO PINHEIROS</td>
-      <td>SAO PAULO</td>
-      <td>SP</td>
-      <td>011</td>
-      <td>8139694</td>
-      <td>RICARDO</td>
-    </tr>
-    <tr>
-      <td>9737332</td>
-      <td>25940104</td>
-      <td>2014-01-07</td>
-      <td>29070</td>
-      <td>        </td>
-      <td>PDV</td>
-      <td>INSTALACAO</td>
-      <td >
-        <div  >MICROFILMADA</div>
-      </td>
-      <td>12/10/1998</td>
-      <td>AV IBIRAPUERA</td>
-      <td>3103</td>
-      <td>LJ 10</td>
-      <td>MOEMA</td>
-      <td>SAO PAULO</td>
-      <td>SP</td>
-      <td>011</td>
-      <td>6962700</td>
-      <td>RONALDO</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="list" style="position: relative; width: 100%; left: 50px; margin-top: 20px">
+      <table style="width: 90%">
+        <tbody>
+        <tr style="font-weight: bold">
+          <td>PV</td>
+          <td>Cliente</td>
+          <td>FCT</td>
+          <td>TipoEquipamento</td>
+          <td>Dth_CadastroFCT</td>
+          <td>Endereco</td>
+          <td>Numero</td>
+          <td>Complemento</td>
+          <td>Bairro</td>
+          <td>Cidade</td>
+          <td>Estado</td>
+          <td>DDD</td>
+          <td>Telefone</td>
+          <td>PessoaContato</td>
+        </tr>
+        <tr style="height:19px;">
+          <td>140907556</td>
+          <td>25940104</td>
+          <td>29050</td>
+          <td>PDV</td>
+          <td>12/10/1998</td>
+          <td>AV IGUATEMI</td>
+          <td>777</td>
+          <td>Q 6 LJ 7 PISO 2</td>
+          <td>VL BRANOIN</td>
+          <td>CAMPINAS</td>
+          <td>SP</td>
+          <td></td>
+          <td></td>
+          <td>LAERCIO</td>
+        </tr>
+        <tr>
+          <td>33251</td>
+          <td>25940104</td>
+          <td>29060</td>
+          <td>PDV</td>
+          <td>12/10/1998</td>
+          <td>PC PANAMERICA</td>
+          <td>50</td>
+          <td>                    </td>
+          <td>ALTO PINHEIROS</td>
+          <td>SAO PAULO</td>
+          <td>SP</td>
+          <td>011</td>
+          <td>8139694</td>
+          <td>RICARDO</td>
+        </tr>
+        <tr>
+          <td>9737332</td>
+          <td>25940104</td>
+          <td>29070</td>
+          <td>PDV</td>
+          <td>12/10/1998</td>
+          <td>AV IBIRAPUERA</td>
+          <td>3103</td>
+          <td>LJ 10</td>
+          <td>MOEMA</td>
+          <td>SAO PAULO</td>
+          <td>SP</td>
+          <td>011</td>
+          <td>6962700</td>
+          <td>RONALDO</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 <% end %>

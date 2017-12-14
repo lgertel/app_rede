@@ -1,6 +1,8 @@
-<h1>Editing Admin Ticket</h1>
+<div style="position: relative; left: 20px"><h1><b>Ticket <%= @admin_ticket.id %></b></h1></div>
 
 <%= render 'form', admin_ticket: @admin_ticket %>
 
-<%= link_to 'Show', @admin_ticket %> |
-<%= link_to 'Back', admin_tickets_path %>
+<div style="position: relative; left: 50px">
+    <%= link_to 'Visualizar', @admin_ticket %> |
+    <%= link_to 'Voltar', admin_tickets_path %>
+</div>

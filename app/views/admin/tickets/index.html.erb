@@ -1,45 +1,90 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Admin Tickets</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Flow</th>
-      <th>Cnpj</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>City</th>
-      <th>State</th>
-      <th>Address</th>
-      <th>Audio</th>
-      <th>Dossier</th>
-      <th>Report</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @admin_tickets.each do |admin_ticket| %>
+<div style="position: relative; left: 20px"><h1><b>Tickets Abertos</b></h1></div>
+<style>
+table, tr, th, td, thead, tbody {
+  border: 1px silver solid;
+}
+a {
+  color: #FF7800;
+}
+a:hover {
+  color: #FF7800;
+}
+</style>
+<div style="position: relative; left: 5%; top: 10px">
+  <table class="table" style="width: 90%;">
+    <thead>
       <tr>
-        <td><%= admin_ticket.flow_id %></td>
-        <td><%= admin_ticket.cnpj %></td>
-        <td><%= admin_ticket.name %></td>
-        <td><%= admin_ticket.description %></td>
-        <td><%= admin_ticket.city %></td>
-        <td><%= admin_ticket.state %></td>
-        <td><%= admin_ticket.address %></td>
-        <td><%= admin_ticket.audio %></td>
-        <td><%= admin_ticket.dossier %></td>
-        <td><%= admin_ticket.report %></td>
-        <td><%= link_to 'Show', admin_ticket %></td>
-        <td><%= link_to 'Edit', edit_admin_ticket_path(admin_ticket) %></td>
-        <td><%= link_to 'Destroy', admin_ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>ID Ticket</th>
+        <th>CNPJ</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Cidade</th>
+        <th>Estado</th>
+        <th>Endereço</th>
+        <th>Etapa</th>
+        <th>Ação</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @admin_tickets.each do |admin_ticket| %>
+        <tr>
+          <td><%= admin_ticket.flow_id %></td>
+          <td><%= admin_ticket.cnpj %></td>
+          <td><%= admin_ticket.name %></td>
+          <td><%= admin_ticket.description %></td>
+          <td><%= admin_ticket.city %></td>
+          <td><%= admin_ticket.state %></td>
+          <td><%= admin_ticket.address %></td>
+          <td>
+            <% if admin_ticket.flow.flow_type == 1 %>
+              <% if admin_ticket.flow.stage == 1 %>
+                Aguardando EPS
+              <% elsif admin_ticket.flow.stage == 2 %>
+                Aguardando Dossiê
+              <% elsif admin_ticket.flow.stage == 3 %>
+                Dossiê em Aprovação
+              <% elsif admin_ticket.flow.stage == 4 %>
+                Em exclusão de débito
+              <% elsif admin_ticket.flow.stage == 5 %>
+                Aguardando ajuste comercial
+              <% elsif admin_ticket.flow.stage == 6 %>
+                Aguardando report
+              <% elsif admin_ticket.flow.stage == 7 %>
+                Finalizado
+              <% end %>
 
-<%= link_to 'New Admin Ticket', new_admin_ticket_path %>
+
+
+            <% elsif admin_ticket.flow.flow_type == 2 %>
+              <% if admin_ticket.flow.stage == 1 %>
+                Em validação pelo cliente
+              <% elsif admin_ticket.flow.stage == 2 %>
+                Em aprovação Logística Interna
+              <% elsif admin_ticket.flow.stage == 3 %>
+                Em aprovação Logística Outdoor
+              <% elsif admin_ticket.flow.stage == 4 %>
+                Aguardando data prestador
+              <% elsif admin_ticket.flow.stage == 5 %>
+                Consolidação cronograma
+              <% elsif admin_ticket.flow.stage == 6 %>
+                Aprovação cronograma cliente
+              <% elsif admin_ticket.flow.stage == 7 %>
+                Finalizado
+              <% end %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'Visualizar', admin_ticket %>&nbsp;&nbsp;&nbsp;
+            <%= link_to 'Atuar', edit_admin_ticket_path(admin_ticket) %>&nbsp;&nbsp;&nbsp;
+            <%= link_to 'Deletar', admin_ticket, method: :delete, data: { confirm: 'Confirma a exclusão?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'Criar Novo Ticket', new_admin_ticket_path %>
+</div>\
