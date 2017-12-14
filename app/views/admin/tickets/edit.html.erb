@@ -1,4 +1,15 @@
-<div style="position: relative; left: 20px"><h1><b>Ticket <%= @admin_ticket.id %></b></h1></div>
+<div style="position: relative; left: 20px">
+    <h1>
+        <b>
+        Ticket <%= @admin_ticket.id %> - 
+        <% if @admin_ticket.flow.flow_type == 1 %>
+            Aluguel
+        <% else %>
+            Rollout
+        <% end %>
+        </b>
+    </h1>
+</div>
 
 <%= render 'form', admin_ticket: @admin_ticket %>
 
