@@ -1,36 +1,40 @@
 <% if (current_user.has_role? :atendimento) %>
-  <div class="field">
-    <%= form.label :ticket_type %>
-    <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
-  </div>
+<div style="position: relative; left: 50px">
+  <table>
+    <tr>
+      <td><b>Tipo de Ticket:</b></td>
+      <td><%= form.select(:ticket_type, options_for_select([['Aluguel', 1]])) %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :cnpj %>
-    <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
-  </div>
+    <tr>
+      <td><b>CNPJ:</b></td>
+      <td><%= form.text_field :cnpj, id: :admin_ticket_cnpj %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :admin_ticket_name %>
-  </div>
+    <tr>
+      <td><b>Nome:</b></td>
+      <td><%= form.text_field :name, id: :admin_ticket_name %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description, id: :admin_ticket_description %>
-  </div>
+    <tr>
+      <td><b>Descrição:</b></td>
+      <td><%= form.text_field :description, id: :admin_ticket_description %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city, id: :admin_ticket_city %>
-  </div>
+    <tr>
+      <td><b>Cidade:</b></td>
+      <td><%= form.text_field :city, id: :admin_ticket_city %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state, id: :admin_ticket_state %>
-  </div>
+    <tr>
+      <td><b>Estado:</b></td>
+      <td><%= form.text_field :state, id: :admin_ticket_state %></td>
+    </tr>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address, id: :admin_ticket_address %>
-  </div>
+    <tr>
+      <td><b>Endereço:</b></td>
+      <td><%= form.text_field :address, id: :admin_ticket_address %></td>
+    </tr>
+  </table>
+</div>
 <% end %>

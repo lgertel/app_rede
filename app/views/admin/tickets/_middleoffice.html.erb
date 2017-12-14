@@ -1,169 +1,166 @@
 <% if (current_user.has_role? :middleoffice) %>
-
+<style>
+.list table, .list tr, .list th, .list td, .list thead, .list tbody {
+  border: 1px silver solid;
+}
+.list a {
+  color: #FF7800;
+}
+.list a:hover {
+  color: #FF7800;
+}
+</style>
   <% if @admin_ticket.flow.nil? %>
-    <div class="field">
-      <%= form.label :ticket_type %>
-      <%= form.select(:ticket_type, options_for_select([['Aluguel', 1], ['Rollout', 2]])) %>
-    </div>
+    <div style="position: relative; left: 50px">
+      <table>
+        <tr>
+          <td><b>Tipo de Ticket:</b></td>
+          <td><%= form.select(:ticket_type, options_for_select([['Rollout', 2]])) %></td>
+        </tr>
 
-    <div class="field">
-      <%= form.label :cnpj %>
-      <%= form.text_field :cnpj, id: :admin_ticket_cnpj %>
-    </div>
+        <tr>
+          <td><b>CNPJ:</b></td>
+          <td><%= form.text_field :cnpj, id: :admin_ticket_cnpj %></td>
+        </tr>
 
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name, id: :admin_ticket_name %>
-    </div>
+        <tr>
+          <td><b>Nome:</b></td>
+          <td><%= form.text_field :name, id: :admin_ticket_name %></td>
+        </tr>
 
-    <div class="field">
-      <%= form.label :description %>
-      <%= form.text_field :description, id: :admin_ticket_description %>
-    </div>
+        <tr>
+          <td><b>Descrição:</b></td>
+          <td><%= form.text_field :description, id: :admin_ticket_description %></td>
+        </tr>
 
-    <div class="field">
-      <%= form.label :city %>
-      <%= form.text_field :city, id: :admin_ticket_city %>
-    </div>
+        <tr>
+          <td><b>Cidade:</b></td>
+          <td><%= form.text_field :city, id: :admin_ticket_city %></td>
+        </tr>
 
-    <div class="field">
-      <%= form.label :state %>
-      <%= form.text_field :state, id: :admin_ticket_state %>
-    </div>
+        <tr>
+          <td><b>Estado:</b></td>
+          <td><%= form.text_field :state, id: :admin_ticket_state %></td>
+        </tr>
 
-    <div class="field">
-      <%= form.label :address %>
-      <%= form.text_field :address, id: :admin_ticket_address %>
+        <tr>
+          <td><b>Endereço:</b></td>
+          <td><%= form.text_field :address, id: :admin_ticket_address %></td>
+        </tr>
+      </table>
     </div>
   <% elsif @admin_ticket.flow.stage == 5 %>
-    <p>
-      <strong>Cnpj:</strong>
-      <%= @admin_ticket.cnpj %>
-    </p>
-
-    <p>
-      <strong>Name:</strong>
-      <%= @admin_ticket.name %>
-    </p>
-
-    <p>
-      <strong>Description:</strong>
-      <%= @admin_ticket.description %>
-    </p>
-
-    <p>
-      <strong>City:</strong>
-      <%= @admin_ticket.city %>
-    </p>
-
-    <p>
-      <strong>State:</strong>
-      <%= @admin_ticket.state %>
-    </p>
-
-    <p>
-      <strong>Address:</strong>
-      <%= @admin_ticket.address %>
-    </p>
-
-    <%= form.label :consolidate_schedule %>
-    <%= select_tag 'admin_ticket[consolidate_schedule]', options_for_select([['Aprovar', 1]]) %>
-
-    <table>
-      <tbody>
-      <tr>
-        <td>PV</td>
-        <td>Cliente</td>
+    <div style="position: relative; left: 50px">
+      <table>
         <td>
-          <div>DataCancelamentoPV</div>
-        </td>
-        <td>FCT</td>
-        <td>Terminal</td>
-        <td>TipoEquipamento</td>
-        <td>TipoFCT</td>
-        <td>SituacaFCT</td>
-        <td>Dth_CadastroFCT</td>
-        <td>Endereco</td>
-        <td>Numero</td>
-        <td>Complemento</td>
-        <td>Bairro</td>
-        <td>Cidade</td>
-        <td>Estado</td>
-        <td>DDD</td>
-        <td>Telefone</td>
-        <td>PessoaContato</td>
-        <td dir="ltr">Data</td>
-      </tr>
-      <tr style="height:19px;">
-        <td>140907556</td>
-        <td>25940104</td>
-        <td>2016-03-17</td>
-        <td>29050</td>
-        <td>        </td>
-        <td>PDV</td>
-        <td>INSTALACAO</td>
-        <td>
-          <div>MICROFILMADA</div>
-        </td>
-        <td>12/10/1998</td>
-        <td>AV IGUATEMI</td>
-        <td>777</td>
-        <td>Q 6 LJ 7 PISO 2</td>
-        <td>VL BRANOIN</td>
-        <td>CAMPINAS</td>
-        <td>SP</td>
-        <td></td>
-        <td></td>
-        <td>LAERCIO</td>
-        <td><%= @admin_ticket.dt_one %></td>
-      </tr>
-      <tr>
-        <td>33251</td>
-        <td>25940104</td>
-        <td>2014-01-07</td>
-        <td>29060</td>
-        <td>        </td>
-        <td>PDV</td>
-        <td>INSTALACAO</td>
-        <td>
-          <div>MICROFILMADA</div>
-        </td>
-        <td>12/10/1998</td>
-        <td>PC PANAMERICA</td>
-        <td>50</td>
-        <td>                    </td>
-        <td>ALTO PINHEIROS</td>
-        <td>SAO PAULO</td>
-        <td>SP</td>
-        <td>011</td>
-        <td>8139694</td>
-        <td>RICARDO</td>
-        <td><%= @admin_ticket.dt_two %></td>
-      </tr>
-      <tr>
-        <td>9737332</td>
-        <td>25940104</td>
-        <td>2014-01-07</td>
-        <td>29070</td>
-        <td>        </td>
-        <td>PDV</td>
-        <td>INSTALACAO</td>
-        <td>
-          <div>MICROFILMADA</div>
-        </td>
-        <td>12/10/1998</td>
-        <td>AV IBIRAPUERA</td>
-        <td>3103</td>
-        <td>LJ 10</td>
-        <td>MOEMA</td>
-        <td>SAO PAULO</td>
-        <td>SP</td>
-        <td>011</td>
-        <td>6962700</td>
-        <td>RONALDO</td>
-        <td><%= @admin_ticket.dt_three %></td>
-      </tr>
-      </tbody>
-    </table>
+          <tr>
+            <td><b>CNPJ:</b></td>
+            <td><%= @admin_ticket.cnpj %></td>
+          </tr>
+          <tr>
+            <td><b>Nome:</b></td>
+            <td><%= @admin_ticket.name %></td>
+          </tr>
+          <tr>
+            <td><b>Descrição:</b></td>
+            <td><%= @admin_ticket.description %></td>
+          </tr>
+          <tr>
+            <td><b>Cidade:</b></td>
+            <td><%= @admin_ticket.city %></td>
+          </tr>
+          <tr>
+            <td><b>Estado:</b></td>
+            <td><%= @admin_ticket.state %></td>
+          </tr>
+          <tr>
+            <td><b>Endereço:</b></td>
+            <td><%= @admin_ticket.address %></td>
+          </tr>
+          <tr>
+            <td><b>Confirmar datas:</b></td>
+            <td><%= @admin_ticket.rollout_date_inform %></td>
+          </tr>
+          <tr>
+            <td><b>Aprovar cronograma:</b></td>
+            <td><%= select_tag 'admin_ticket[consolidate_schedule]', options_for_select([['Aprovar', 1]]) %></td>
+          </tr>
+      </table>
+    </div>
+
+<div class="list" style="position: relative; width: 100%; left: 1%; margin-top: 20px">
+      <table style="width: 98%">
+        <tbody>
+        <tr style="font-weight: bold">
+          <td>PV</td>
+          <td>Cliente</td>
+          <td>FCT</td>
+          <td>TipoEquipamento</td>
+          <td>Dth_CadastroFCT</td>
+          <td>Endereco</td>
+          <td>Numero</td>
+          <td>Complemento</td>
+          <td>Bairro</td>
+          <td>Cidade</td>
+          <td>Estado</td>
+          <td>DDD</td>
+          <td>Telefone</td>
+          <td>PessoaContato</td>
+          <td>Data</td>
+        </tr>
+        <tr style="height:19px;">
+          <td>140907556</td>
+          <td>25940104</td>
+          <td>29050</td>
+          <td>PDV</td>
+          <td>12/10/1998</td>
+          <td>AV IGUATEMI</td>
+          <td>777</td>
+          <td>Q 6 LJ 7 PISO 2</td>
+          <td>VL BRANOIN</td>
+          <td>CAMPINAS</td>
+          <td>SP</td>
+          <td></td>
+          <td></td>
+          <td>LAERCIO</td>
+          <td><%= @admin_ticket.dt_one %></td>
+        </tr>
+        <tr>
+          <td>33251</td>
+          <td>25940104</td>
+          <td>29060</td>
+          <td>PDV</td>
+          <td>12/10/1998</td>
+          <td>PC PANAMERICA</td>
+          <td>50</td>
+          <td>                    </td>
+          <td>ALTO PINHEIROS</td>
+          <td>SAO PAULO</td>
+          <td>SP</td>
+          <td>011</td>
+          <td>8139694</td>
+          <td>RICARDO</td>
+          <td><%= @admin_ticket.dt_two %></td>
+        </tr>
+        <tr>
+          <td>9737332</td>
+          <td>25940104</td>
+          <td>29070</td>
+          <td>PDV</td>
+          <td>12/10/1998</td>
+          <td>AV IBIRAPUERA</td>
+          <td>3103</td>
+          <td>LJ 10</td>
+          <td>MOEMA</td>
+          <td>SAO PAULO</td>
+          <td>SP</td>
+          <td>011</td>
+          <td>6962700</td>
+          <td>RONALDO</td>
+          <td><%= @admin_ticket.dt_three %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   <% end %>
 <% end %>

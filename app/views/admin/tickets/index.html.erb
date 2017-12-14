@@ -53,6 +53,25 @@ a:hover {
               <% elsif admin_ticket.flow.stage == 7 %>
                 Finalizado
               <% end %>
+
+
+
+            <% elsif admin_ticket.flow.flow_type == 2 %>
+              <% if admin_ticket.flow.stage == 1 %>
+                Em validação pelo cliente
+              <% elsif admin_ticket.flow.stage == 2 %>
+                Em aprovação Logística Interna
+              <% elsif admin_ticket.flow.stage == 3 %>
+                Em aprovação Logística Outdoor
+              <% elsif admin_ticket.flow.stage == 4 %>
+                Aguardando data prestador
+              <% elsif admin_ticket.flow.stage == 5 %>
+                Consolidação cronograma
+              <% elsif admin_ticket.flow.stage == 6 %>
+                Aprovação cronograma cliente
+              <% elsif admin_ticket.flow.stage == 7 %>
+                Finalizado
+              <% end %>
             <% end %>
           </td>
           <td>
