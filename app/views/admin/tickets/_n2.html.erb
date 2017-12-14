@@ -28,11 +28,11 @@
       </tr>
       <tr>
         <td><b><%= form.label :audio %></b></td>
-        <td><%= @admin_ticket.audio %></td>
+        <td><%= link_to "#{@admin_ticket.audio}", "/uploads/#{@admin_ticket.audio}" %></td>
       </tr>
       <tr>
         <td><b>Dossiê:</b></td>
-        <td><%= @admin_ticket.dossier %></td>
+        <td><%= link_to "#{@admin_ticket.dossier}", "/uploads/#{@admin_ticket.dossier}" %></td>
       </tr>
 
       <% if @admin_ticket.flow.stage == 3 %>

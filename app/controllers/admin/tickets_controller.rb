@@ -109,7 +109,7 @@ class Admin::TicketsController < ApplicationController
 
     respond_to do |format|
       if @admin_ticket.update(params) && flow.save
-        format.html { redirect_to @admin_ticket, notice: 'Ticket was successfully updated.' }
+        format.html { redirect_to @admin_ticket, notice: 'Ticket atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @admin_ticket }
       else
         format.html { render :edit }
