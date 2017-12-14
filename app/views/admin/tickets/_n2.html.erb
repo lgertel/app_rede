@@ -1,93 +1,120 @@
 <% if current_user.has_role? :n2 %>
-  <p>
-    <strong>Cnpj:</strong>
-    <%= @admin_ticket.cnpj %>
-  </p>
+<div style="position: relative; left: 50px">
+  <table>
+    <td>
+      <tr>
+        <td><b>CNPJ:</b></td>
+        <td><%= @admin_ticket.cnpj %></td>
+      </tr>
+      <tr>
+        <td><b>Nome:</b></td>
+        <td><%= @admin_ticket.name %></td>
+      </tr>
+      <tr>
+        <td><b>Descrição:</b></td>
+        <td><%= @admin_ticket.description %></td>
+      </tr>
+      <tr>
+        <td><b>Cidade:</b></td>
+        <td><%= @admin_ticket.city %></td>
+      </tr>
+      <tr>
+        <td><b>Estado:</b></td>
+        <td><%= @admin_ticket.state %></td>
+      </tr>
+      <tr>
+        <td><b>Endereço:</b></td>
+        <td><%= @admin_ticket.address %></td>
+      </tr>
+      <tr>
+        <td><b><%= form.label :audio %></b></td>
+        <td><%= @admin_ticket.audio %></td>
+      </tr>
+      <tr>
+        <td><b>Dossiê:</b></td>
+        <td><%= @admin_ticket.dossier %></td>
+      </tr>
 
-  <p>
-    <strong>Name:</strong>
-    <%= @admin_ticket.name %>
-  </p>
+      <% if @admin_ticket.flow.stage == 3 %>
+        <tr>
+          <td><b>Aprovar Dossiê?</b></td>
+          <td>
+            <%= select_tag 'admin_ticket[dossier_status]', options_for_select([['Aprovar', 1],  ['Recusar', 0]]) %>
+          </td>
+        </tr>
+      <% end %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @admin_ticket.description %>
-  </p>
+      <% if @admin_ticket.flow.stage == 4 %>
+        <tr>
+          <td><b>Dossiê aprovado?</b></td>
+          <td>
+            <% if @admin_ticket.dossier_status == true %>
+              Aprovado
+            <% else %>
+              Reprovado
+            <% end%>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Débitos excluídos?<b></td>
+          <td>
+            <%= select_tag 'admin_ticket[debits_status]', options_for_select([['-', 0], ['Confirmar exclusão', 1]]) %>
+          </td>
+      <% end %>
 
-  <p>
-    <strong>City:</strong>
-    <%= @admin_ticket.city %>
-  </p>
 
-  <p>
-    <strong>State:</strong>
-    <%= @admin_ticket.state %>
-  </p>
+      <% if @admin_ticket.flow.stage == 5 %>
+        <tr>
+          <td><b>Status Dossiê:</b></td>
+          <td><%= @admin_ticket.dossier_status %></td>
+        </tr>
+        <tr>
+          <td><b>Débitos excluídos:</b></td>
+          <td>
+            <% if @admin_ticket.debits_status == true %>
+              Sim
+            <% else %>
+              Não
+            <% end%>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Ajuste comercial</b></td>
+          <td><%= select_tag 'admin_ticket[comercial_status]', options_for_select([['-', 0], ['Ajuste comercial realizado', 1]]) %></td>
+        </tr>
+      <% end %>
 
-  <p>
-    <strong>Address:</strong>
-    <%= @admin_ticket.address %>
-  </p>
-
-  <p>
-    <strong>Audio:</strong>
-    <%= @admin_ticket.audio %>
-  </p>
-
-  <p>
-    <strong>Dossier:</strong>
-    <%= @admin_ticket.dossier %>
-  </p>
-
-  <% if @admin_ticket.flow.stage == 3 %>
-    <%= form.label :dossier_status %>
-    <%= select_tag 'admin_ticket[dossier_status]', options_for_select([['Aprovar', 1],  ['Recusar', 0]]) %>
-  <% end %>
-
-  <% if @admin_ticket.flow.stage == 4 %>
-    <p>
-      <strong>Dossier Status:</strong>
-      <%= @admin_ticket.dossier_status %>
-    </p>
-    <div class="field">
-      <%= form.label :debits_status %>
-      <%= select_tag 'admin_ticket[debits_status]', options_for_select([['-', 0], ['Excluir Débitos', 1]]) %>
-    </div>
-  <% end %>
-
-  <% if @admin_ticket.flow.stage == 5 %>
-    <p>
-      <strong>Dossier Status:</strong>
-      <%= @admin_ticket.dossier_status %>
-    </p>
-    <p>
-      <strong>Debit Status:</strong>
-      <%= @admin_ticket.debits_status %>
-    </p>
-    <div class="field">
-      <%= form.label :comercial_status %>
-      <%= select_tag 'admin_ticket[comercial_status]', options_for_select([['-', 0], ['Ajustar Condição Comercial', 1]]) %>
-    </div>
-  <% end %>
-
-  <% if @admin_ticket.flow.stage == 6 %>
-    <p>
-      <strong>Dossier Status:</strong>
-      <%= @admin_ticket.dossier_status %>
-    </p>
-    <p>
-      <strong>Debit Status:</strong>
-      <%= @admin_ticket.debits_status %>
-    </p>
-    <p>
-      <strong>Comercial Status:</strong>
-      <%= @admin_ticket.comercial_status %>
-    </p>
-    <div class="field">
-      <%= form.label :report %>
-      <!--<%= form.text_field :report, id: :admin_ticket_report %>-->
-      <%= form.file_field :report, id: :admin_ticket_report %>
-    </div>
-  <% end %>
+      <% if @admin_ticket.flow.stage == 6 %>
+        <tr>
+          <td><b>Status Dossiê:</b></td>
+          <td><%= @admin_ticket.dossier_status %></td>
+        </tr>
+        <tr>
+          <td><b>Débitos excluídos:</b></td>
+          <td>
+            <% if @admin_ticket.debits_status == true %>
+              Sim
+            <% else %>
+              Não
+            <% end%>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Ajuste comercial:</b></td>
+          <td>
+            <% if @admin_ticket.comercial_status == true %>
+              Realizado
+            <% else %>
+              Não realizado
+            <% end%>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Report</b></td>
+          <td><%= form.file_field :report, id: :admin_ticket_report %></td>
+        </tr>
+      <% end %>
+  </table>
+</div>
 
 <% end %>
