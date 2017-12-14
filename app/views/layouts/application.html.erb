@@ -44,8 +44,7 @@
           <img src="/images/logo-rede.svg" style="position: relative; height: 40px; left: 60px">
         </div>
           <% if user_signed_in? %>
-          <div class="login" style="line-height: 30px">
-            <%= current_user.email %><br/>
+          <div class="login" style="line-height: 60px">
             <%= link_to "Logout", destroy_user_session_path, method: :delete %>
           <% else %>
           <div class="login" style="line-height: 60px">
@@ -53,7 +52,19 @@
           <% end %>
         </div>
       </div>
-
+        <% if user_signed_in? %>
+        <div>
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  <li><span class="navbar-brand" href="#"><%= current_user.email %></span></li>
+                </ul>
+              </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+          </nav>
+        </div>
+          <% end %>
       <div style="position: relative;">
         <% flash.each do |name, msg| %>
           <div class="alert alert-success" role="alert">
